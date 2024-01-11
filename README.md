@@ -1,4 +1,4 @@
-# Rqlite Bug Throubleshooting
+# Rqlite Bug Troubleshooting
 
 ## Install Requirements
 ``` pip install -r requirements ```
