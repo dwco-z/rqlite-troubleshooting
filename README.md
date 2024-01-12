@@ -1,4 +1,6 @@
-# Rqlite Bug Troubleshooting
+# Rqlite Bug Throubleshooting
+
+Issue: https://github.com/rqlite/rqlite/issues/1581
 
 ## Install Requirements
 ``` pip install -r requirements ```
@@ -9,3 +11,5 @@
 - Execute main.py file
 
     ``` python main.py ```
+
+- Refer to the generated rqlited.log to inspect the error
