@@ -1,3 +1,4 @@
+import signal
 import subprocess
 import os
 import json
@@ -16,26 +17,34 @@ class RqliteManager:
         self.process = None
         self.client = None
     
-    def set_peers(self):
-        peers = [
-            {
-                "id": f"{self.host}:{self.raft_port}",
-                "address": f"{self.host}:{self.raft_port}",
-                "non_voter": False
-            }
-        ]
+    def set_peers(self, peers: list):
         with open(os.path.join(self.data_path, "raft", 'peers.json'), 'w') as fp:
             json.dump(peers, fp)
 
-    def start_rqlited(self):
+    def get_peers_entry(self):
+        return {
+            "id": f"{self.host}:{self.raft_port}",
+            "address": f"{self.host}:{self.raft_port}",
+            "non_voter": False
+        }
+
+    def start_rqlited(self, join_addresses=""):
         print('starting rqlited...')
         cmd = [
             "rqlited.exe",  # Path to the rqlited executable
             f"-http-addr={self.host}:{self.http_port}",
             f"-raft-addr={self.host}:{self.raft_port}",
+            f"-raft-log-level=DEBUG",
+            f"-raft-timeout=2s",
+            f"-raft-election-timeout=10s",
             self.data_path  # Data directory for rqlite
         ]
-        self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        if join_addresses:
+            cmd.insert(-2, f"-bootstrap-expect={len(join_addresses)}")
+            cmd.insert(-2, "-join=" + ",".join(join_addresses))
+        # print(cmd)
+        # exit()
+        self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
 
         # Start a thread to asynchronously log stdout to a file
         self.log_thread = threading.Thread(target=self._log_stdout, daemon=True)
@@ -50,7 +59,11 @@ class RqliteManager:
     def stop_rqlited(self):
         print('stopping rqlited...')
         if self.process:
-            self.process.terminate()
+            self.process.send_signal(signal.CTRL_BREAK_EVENT)
+            try:
+                self.process.wait(30)
+            except:
+                self.process.terminate()
             print('stopped!')
             self.process = None
 

@@ -1,11 +1,20 @@
 
 import shutil
 from rqlite_manager import RqliteManager
+from concurrent.futures import ThreadPoolExecutor
 
 import threading
 import time
 import os
 from rqlite_client import RqliteClient
+
+import signal
+import sys
+
+def signal_handler(sig, frame):
+    print('You pressed Ctrl+C!')
+    # Implement graceful shutdown logic here
+    sys.exit(0)
 
 class RqliteSequentialCaller:
 
@@ -36,33 +45,43 @@ class RqliteSequentialCaller:
         self._stop_event.set()
         self._thread.join()
 
+def start_manager(manager, joinAddresses):
+    manager.start_rqlited(joinAddresses)
+
+def start_all_instances(manager_instances, joinAddresses=[]):
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        futures = [executor.submit(start_manager, manager, joinAddresses) for manager in manager_instances]
+        for future in futures:
+            future.result()
 
 if __name__ == '__main__':
-    # clear files
-    if os.path.exists('rqlited.log'):
-        os.remove('rqlited.log')
-    shutil.rmtree('DummyDatabase', ignore_errors=True)
+    signal.signal(signal.SIGINT, signal_handler)
+    for i in range(100):
+        try:
+            # clear files
+            if os.path.exists('node1.log'):
+                os.remove('node1.log')
+            if os.path.exists('node2.log'):
+                os.remove('node2.log')
+            if os.path.exists('node3.log'):
+                os.remove('node3.log')
+            shutil.rmtree('Node1', ignore_errors=True)
+            shutil.rmtree('Node2', ignore_errors=True)
+            shutil.rmtree('Node3', ignore_errors=True)
 
-    manager = RqliteManager()
+            node1Manager = RqliteManager(data_path="Node1", host='localhost', http_port=4001, raft_port=5001, log_file="node1.log")
+            node2Manager = RqliteManager(data_path="Node2", host='localhost', http_port=4002, raft_port=5002, log_file="node2.log")
+            node3Manager = RqliteManager(data_path="Node3", host='localhost', http_port=4003, raft_port=5003, log_file="node3.log")
+            
+            all_instances = (node1Manager, node2Manager, node3Manager)
+            joinAddresses = [f"{manager.host}:{manager.raft_port}" for manager in all_instances]
 
-    # 1. Initialize cluster using peers.json
-    # peers.json cannot be set rightaway in a brand new cluster otherwise it will fail in further startups (https://github.com/rqlite/rqlite/issues/1293#issuecomment-1664140683) 
-    # therefore we need to start the cluster for the first time before setting the peers and then we can proceed 
-    manager.start_rqlited()
-    manager.stop_rqlited()
-    manager.set_peers() 
-    manager.start_rqlited()
-
-    # 2. Restore database
-    restore_result = manager.client.restore('dummy.db')
-    print(restore_result)
-
-    # 3. Send queries
-    queries = [ f"CREATE TABLE bar{i} ([Id] guid PRIMARY KEY NOT NULL)" for i in range(1000) ]
-    caller = RqliteSequentialCaller(queries, interval=0)
-    caller.start()
-
-    # 4. Wait for rqlite failure and stop
-    time.sleep(10)
-    manager.stop_rqlited()
-
+            peers_entries = [manager.get_peers_entry() for manager in all_instances]
+            
+            # test start-stop-configure_peers-start while monitoring readyz during start
+            start_all_instances(all_instances, joinAddresses)
+            [manager.stop_rqlited() for manager in all_instances]
+            [manager.set_peers(peers_entries) for manager in all_instances]
+            start_all_instances(all_instances)
+        finally:
+            [manager.stop_rqlited() for manager in all_instances]

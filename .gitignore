@@ -3,5 +3,8 @@ __pycache__/
 *.py[cod]
 
 DummyDatabase
+Node1
+Node2
+Node3
 rqlited.exe
 rqlited.log

@@ -1,0 +1,182 @@
+
+            _ _ _
+           | (_) |
+  _ __ __ _| |_| |_ ___
+ | '__/ _  | | | __/ _ \   The lightweight, distributed
+ | | | (_| | | | ||  __/   relational database.
+ |_|  \__, |_|_|\__\___|
+         | |               www.rqlite.io
+         |_|
+
+[rqlited] 2024/03/01 09:54:28 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
+[rqlited] 2024/03/01 09:54:28 go1.21.4, target architecture is amd64, operating system target is windows
+[rqlited] 2024/03/01 09:54:28 launch command: rqlited.exe -http-addr=localhost:4003 -raft-addr=localhost:5003 -raft-log-level=DEBUG -raft-timeout=2s -bootstrap-expect=3 -join=localhost:5001,localhost:5002,localhost:5003 -raft-election-timeout=10s Node3
+[rqlited] 2024/03/01 09:54:28 Raft TCP mux Listener registered with byte header 1
+[rqlited] 2024/03/01 09:54:28 no preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node3, node may be bootstrapping
+[mux] 2024/03/01 09:54:28 mux serving on 127.0.0.1:5003, advertising localhost:5003
+[cluster] 2024/03/01 09:54:28 service listening on localhost:5003
+[rqlited] 2024/03/01 09:54:28 cluster TCP mux Listener registered with byte header 2
+[http] 2024/03/01 09:54:28 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
+[http] 2024/03/01 09:54:28 service listening on 127.0.0.1:4003
+[store] 2024/03/01 09:54:28 opening store with node ID localhost:5003, listening on localhost:5003
+[store] 2024/03/01 09:54:28 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node3
+[store] 2024/03/01 09:54:28 old snapshot directory C:\Projects\rqlite-throubleshoot\Node3\snapshots does not exist, nothing to upgrade
+[snapshot-store] 2024/03/01 09:54:28 store initialized using C:\Projects\rqlite-throubleshoot\Node3\rsnapshots
+[snapshot-store] 2024/03/01 09:54:28 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node3\rsnapshots
+[snapshot-store] 2024/03/01 09:54:28 check complete
+[store] 2024/03/01 09:54:28 0 preexisting snapshots present
+[raft] 2024/03/01 09:54:28 [INFO]  initial configuration: index=0 servers=[]
+[rqlited] 2024/03/01 09:54:28 checking that any supplied join addresses don't serve HTTP(S)
+[raft] 2024/03/01 09:54:28 [INFO]  entering follower state: follower="Node at localhost:5003 [Follower]" leader-address= leader-id=
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62875: 71 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62879: 22 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62883: 71 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62887: 22 (unsupported protocol?)
+[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5001: store not open
+[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5002: no leader
+[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5003: no leader
+[cluster-join] 2024/03/01 09:54:28 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62935: 71 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62940: 22 (unsupported protocol?)
+[cluster-bootstrap] 2024/03/01 09:54:28 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
+[store] 2024/03/01 09:54:28 reached expected bootstrap count of 3, starting cluster bootstrap
+[store] 2024/03/01 09:54:28 cluster bootstrap successful, servers: [{Voter localhost:5003 localhost:5003} {Voter localhost:5002 localhost:5002} {Voter localhost:5001 localhost:5001}]
+[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5001: no leader
+[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5002: no leader
+[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5003: no leader
+[cluster-join] 2024/03/01 09:54:30 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
+[cluster-bootstrap] 2024/03/01 09:54:30 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
+[raft] 2024/03/01 09:54:31 [DEBUG] lost leadership because received a requestVote with a newer term
+[raft] 2024/03/01 09:54:33 [INFO]  entering candidate state: node="Node at localhost:5003 [Candidate]" term=3
+[raft] 2024/03/01 09:54:33 [DEBUG] voting for self: term=3 id=localhost:5003
+[raft] 2024/03/01 09:54:33 [DEBUG] asking for vote: term=3 from=localhost:5002 address=localhost:5002
+[raft] 2024/03/01 09:54:33 [DEBUG] asking for vote: term=3 from=localhost:5001 address=localhost:5001
+[raft] 2024/03/01 09:54:33 [DEBUG] calculated votes needed: needed=2 term=3
+[raft] 2024/03/01 09:54:33 [DEBUG] vote granted: from=localhost:5003 term=3 tally=1
+[raft] 2024/03/01 09:54:33 [ERROR] failed to make requestVote RPC: target="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it." term=3
+[raft] 2024/03/01 09:54:33 [DEBUG] vote granted: from=localhost:5002 term=3 tally=2
+[raft] 2024/03/01 09:54:33 [INFO]  election won: term=3 tally=2
+[raft] 2024/03/01 09:54:33 [INFO]  entering leader state: leader="Node at localhost:5003 [Leader]"
+[raft] 2024/03/01 09:54:33 [INFO]  added peer, starting replication: peer=localhost:5002
+[raft] 2024/03/01 09:54:33 [INFO]  added peer, starting replication: peer=localhost:5001
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error=EOF
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+2024-03-01T09:54:33.215-0300 [ERROR] raft-net: failed to decode incoming command: error="read tcp 127.0.0.1:5003->127.0.0.1:62985: wsarecv: An existing connection was forcibly closed by the remote host."
+[rqlited] 2024/03/01 09:54:33 received signal "interrupt"
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to heartbeat to: peer=localhost:5001 backoff time=10ms error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+[cluster-bootstrap] 2024/03/01 09:54:33 boot operation marked done
+[rqlited] 2024/03/01 09:54:33 node HTTP API available at http://localhost:4003
+[rqlited] 2024/03/01 09:54:33 connect using the command-line tool via 'rqlite -H localhost -p 4003'
+[http] 2024/03/01 09:54:33 closing HTTP service on 127.0.0.1:4003
+[http] 2024/03/01 09:54:33 HTTP service on 127.0.0.1:4003 stopped: http: Server closed
+[rqlited] 2024/03/01 09:54:33 stepping down as Leader before shutdown
+[raft] 2024/03/01 09:54:33 [DEBUG] starting leadership transfer: id=<nil> address=<nil>
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to heartbeat to: peer=localhost:5002 backoff time=10ms error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [WARN]  failed to contact: server-id=localhost:5002 time=513.7845ms
+[raft] 2024/03/01 09:54:33 [WARN]  failed to contact: server-id=localhost:5001 time=513.7845ms
+[raft] 2024/03/01 09:54:33 [WARN]  failed to contact quorum of nodes, stepping down
+[raft] 2024/03/01 09:54:33 [INFO]  entering follower state: follower="Node at localhost:5003 [Follower]" leader-address= leader-id=
+[raft] 2024/03/01 09:54:33 [DEBUG] lost leadership during transfer (expected)
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5002 localhost:5002}" error="dial tcp [::1]:5002: connectex: No connection could be made because the target machine actively refused it."
+[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it."
+[store] 2024/03/01 09:54:33 store closed with node ID localhost:5003, listening on localhost:5003
+[rqlited] 2024/03/01 09:54:33 rqlite server stopped
+
+            _ _ _
+           | (_) |
+  _ __ __ _| |_| |_ ___
+ | '__/ _  | | | __/ _ \   The lightweight, distributed
+ | | | (_| | | | ||  __/   relational database.
+ |_|  \__, |_|_|\__\___|
+         | |               www.rqlite.io
+         |_|
+
+[rqlited] 2024/03/01 09:54:33 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
+[rqlited] 2024/03/01 09:54:33 go1.21.4, target architecture is amd64, operating system target is windows
+[rqlited] 2024/03/01 09:54:33 launch command: rqlited.exe -http-addr=localhost:4003 -raft-addr=localhost:5003 -raft-log-level=DEBUG -raft-timeout=2s -raft-election-timeout=10s Node3
+[rqlited] 2024/03/01 09:54:33 Raft TCP mux Listener registered with byte header 1
+[mux] 2024/03/01 09:54:33 mux serving on 127.0.0.1:5003, advertising localhost:5003
+[rqlited] 2024/03/01 09:54:33 preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node3
+[cluster] 2024/03/01 09:54:33 service listening on localhost:5003
+[rqlited] 2024/03/01 09:54:33 cluster TCP mux Listener registered with byte header 2
+[http] 2024/03/01 09:54:33 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
+[http] 2024/03/01 09:54:33 service listening on 127.0.0.1:4003
+[store] 2024/03/01 09:54:33 opening store with node ID localhost:5003, listening on localhost:5003
+[store] 2024/03/01 09:54:33 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node3
+[store] 2024/03/01 09:54:33 old snapshot directory C:\Projects\rqlite-throubleshoot\Node3\snapshots does not exist, nothing to upgrade
+[snapshot-store] 2024/03/01 09:54:33 store initialized using C:\Projects\rqlite-throubleshoot\Node3\rsnapshots
+[snapshot-store] 2024/03/01 09:54:33 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node3\rsnapshots
+[snapshot-store] 2024/03/01 09:54:33 check complete
+[store] 2024/03/01 09:54:33 0 preexisting snapshots present
+[store] 2024/03/01 09:54:33 attempting node recovery using C:\Projects\rqlite-throubleshoot\Node3\raft\peers.json
+[store] [recovery] 2024/03/01 09:54:33 recovery detected 0 snapshots
+[store] [recovery] 2024/03/01 09:54:33 last index is 0, last index written to log is 3
+[store] [recovery] 2024/03/01 09:54:34 recovery snapshot created successfully using C:\Projects\rqlite-throubleshoot\Node3\recovery.db
+[store] 2024/03/01 09:54:34 node recovered successfully using C:\Projects\rqlite-throubleshoot\Node3\raft\peers.json
+[raft] 2024/03/01 09:54:34 [INFO]  starting restore from snapshot: id=3-3-1709297673888 last-index=3 last-term=3 size-in-bytes=4096
+[store] 2024/03/01 09:54:34 initiating node restore on node ID localhost:5003
+[store] 2024/03/01 09:54:34 successfully opened database at C:\Projects\rqlite-throubleshoot\Node3\db.sqlite due to restore
+[store] 2024/03/01 09:54:34 node restored in 8.8512ms
+[raft] 2024/03/01 09:54:34 [INFO]  snapshot restore progress: id=3-3-1709297673888 last-index=3 last-term=3 size-in-bytes=4096 read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:34 [INFO]  restored from snapshot: id=3-3-1709297673888 last-index=3 last-term=3 size-in-bytes=4096
+[raft] 2024/03/01 09:54:34 [INFO]  initial configuration: index=1 servers="[{Suffrage:Voter ID:localhost:5001 Address:localhost:5001} {Suffrage:Voter ID:localhost:5002 Address:localhost:5002} {Suffrage:Voter ID:localhost:5003 Address:localhost:5003}]"
+[raft] 2024/03/01 09:54:34 [INFO]  entering follower state: follower="Node at localhost:5003 [Follower]" leader-address= leader-id=
+[rqlited] 2024/03/01 09:54:34 checking that any supplied join addresses don't serve HTTP(S)
+[rqlited] 2024/03/01 09:54:34 node HTTP API available at http://localhost:4003
+[rqlited] 2024/03/01 09:54:34 connect using the command-line tool via 'rqlite -H localhost -p 4003'
+[raft] 2024/03/01 09:54:36 [INFO]  duplicate requestVote for same term: term=3
+[raft] 2024/03/01 09:54:36 [DEBUG] lost leadership because received a requestVote with a newer term
+[raft] 2024/03/01 09:54:36 [WARN]  rejecting vote request since our last term is greater: candidate=localhost:5002 last-term=3 last-candidate-term=2
+[raft] 2024/03/01 09:54:36 [WARN]  failed to get previous log: previous-index=2 last-index=3 error="log not found"
+[raft] 2024/03/01 09:54:36 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:36 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297676855\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:36 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:37 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297676989\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:37 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:37 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677098\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:37 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:37 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677239\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:37 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:37 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677378\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:37 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:37 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677564\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:37 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:37 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677828\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:38 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:38 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297678280\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:39 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:39 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297679042\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:40 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:40 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297680414\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:43 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:43 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297683109\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:48 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:48 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297688364\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:54:52 [ERROR] failed to take snapshot: error="nothing new to snapshot"
+[raft] 2024/03/01 09:54:58 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:58 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297698739\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:55:07 [ERROR] failed to take snapshot: error="nothing new to snapshot"
+[raft] 2024/03/01 09:55:09 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:55:09 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297709070\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:55:19 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:55:19 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297719443\meta.json: The system cannot find the path specified."
+[raft] 2024/03/01 09:55:25 [ERROR] failed to take snapshot: error="nothing new to snapshot"
+[raft] 2024/03/01 09:55:29 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:55:29 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297729825\meta.json: The system cannot find the path specified."
+2024-03-01T09:55:36.733-0300 [ERROR] raft-net: failed to decode incoming command: error="read tcp 127.0.0.1:5003->127.0.0.1:63036: wsarecv: An existing connection was forcibly closed by the remote host."
+[raft] 2024/03/01 09:55:36 [INFO]  snapshot network transfer progress: read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:55:36 [ERROR] failed to finalize snapshot: error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297736739\meta.json: The system cannot find the path specified."
+[rqlited] 2024/03/01 09:55:36 received signal "interrupt"
+[http] 2024/03/01 09:55:36 closing HTTP service on 127.0.0.1:4003
+[http] 2024/03/01 09:55:36 HTTP service on 127.0.0.1:4003 stopped: http: Server closed
+[store] 2024/03/01 09:55:36 store closed with node ID localhost:5003, listening on localhost:5003
+[rqlited] 2024/03/01 09:55:36 rqlite server stopped

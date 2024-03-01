@@ -1,0 +1,114 @@
+
+            _ _ _
+           | (_) |
+  _ __ __ _| |_| |_ ___
+ | '__/ _  | | | __/ _ \   The lightweight, distributed
+ | | | (_| | | | ||  __/   relational database.
+ |_|  \__, |_|_|\__\___|
+         | |               www.rqlite.io
+         |_|
+
+[rqlited] 2024/03/01 09:54:28 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
+[rqlited] 2024/03/01 09:54:28 go1.21.4, target architecture is amd64, operating system target is windows
+[rqlited] 2024/03/01 09:54:28 launch command: rqlited.exe -http-addr=localhost:4001 -raft-addr=localhost:5001 -raft-log-level=DEBUG -raft-timeout=2s -bootstrap-expect=3 -join=localhost:5001,localhost:5002,localhost:5003 -raft-election-timeout=10s Node1
+[rqlited] 2024/03/01 09:54:28 Raft TCP mux Listener registered with byte header 1
+[mux] 2024/03/01 09:54:28 mux serving on 127.0.0.1:5001, advertising localhost:5001
+[rqlited] 2024/03/01 09:54:28 no preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node1, node may be bootstrapping
+[cluster] 2024/03/01 09:54:28 service listening on localhost:5001
+[rqlited] 2024/03/01 09:54:28 cluster TCP mux Listener registered with byte header 2
+[http] 2024/03/01 09:54:28 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
+[http] 2024/03/01 09:54:28 service listening on 127.0.0.1:4001
+[store] 2024/03/01 09:54:28 opening store with node ID localhost:5001, listening on localhost:5001
+[store] 2024/03/01 09:54:28 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node1
+[store] 2024/03/01 09:54:28 old snapshot directory C:\Projects\rqlite-throubleshoot\Node1\snapshots does not exist, nothing to upgrade
+[snapshot-store] 2024/03/01 09:54:28 store initialized using C:\Projects\rqlite-throubleshoot\Node1\rsnapshots
+[snapshot-store] 2024/03/01 09:54:28 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node1\rsnapshots
+[snapshot-store] 2024/03/01 09:54:28 check complete
+[store] 2024/03/01 09:54:28 0 preexisting snapshots present
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62863: 71 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62865: 22 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62869: 71 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62873: 22 (unsupported protocol?)
+[raft] 2024/03/01 09:54:28 [INFO]  initial configuration: index=0 servers=[]
+[raft] 2024/03/01 09:54:28 [INFO]  entering follower state: follower="Node at localhost:5001 [Follower]" leader-address= leader-id=
+[rqlited] 2024/03/01 09:54:28 checking that any supplied join addresses don't serve HTTP(S)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62910: 71 (unsupported protocol?)
+[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62913: 22 (unsupported protocol?)
+[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5001: no leader
+[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5002: no leader
+[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5003: no leader
+[cluster-join] 2024/03/01 09:54:28 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
+[store] 2024/03/01 09:54:28 reached expected bootstrap count of 3, starting cluster bootstrap
+[store] 2024/03/01 09:54:28 cluster bootstrap successful, servers: [{Voter localhost:5003 localhost:5003} {Voter localhost:5002 localhost:5002} {Voter localhost:5001 localhost:5001}]
+[cluster-bootstrap] 2024/03/01 09:54:28 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
+[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5001: no leader
+[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5002: no leader
+[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5003: no leader
+[cluster-join] 2024/03/01 09:54:30 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
+[cluster-bootstrap] 2024/03/01 09:54:30 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
+[raft] 2024/03/01 09:54:31 [DEBUG] lost leadership because received a requestVote with a newer term
+[rqlited] 2024/03/01 09:54:32 received signal "interrupt"
+[cluster-bootstrap] 2024/03/01 09:54:33 boot operation marked done
+[rqlited] 2024/03/01 09:54:33 node HTTP API available at http://localhost:4001
+[rqlited] 2024/03/01 09:54:33 connect using the command-line tool via 'rqlite -H localhost -p 4001'
+[http] 2024/03/01 09:54:33 closing HTTP service on 127.0.0.1:4001
+[http] 2024/03/01 09:54:33 HTTP service on 127.0.0.1:4001 stopped: http: Server closed
+[store] 2024/03/01 09:54:33 store closed with node ID localhost:5001, listening on localhost:5001
+[rqlited] 2024/03/01 09:54:33 rqlite server stopped
+
+            _ _ _
+           | (_) |
+  _ __ __ _| |_| |_ ___
+ | '__/ _  | | | __/ _ \   The lightweight, distributed
+ | | | (_| | | | ||  __/   relational database.
+ |_|  \__, |_|_|\__\___|
+         | |               www.rqlite.io
+         |_|
+
+[rqlited] 2024/03/01 09:54:33 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
+[rqlited] 2024/03/01 09:54:33 go1.21.4, target architecture is amd64, operating system target is windows
+[rqlited] 2024/03/01 09:54:33 launch command: rqlited.exe -http-addr=localhost:4001 -raft-addr=localhost:5001 -raft-log-level=DEBUG -raft-timeout=2s -raft-election-timeout=10s Node1
+[rqlited] 2024/03/01 09:54:33 Raft TCP mux Listener registered with byte header 1
+[mux] 2024/03/01 09:54:33 mux serving on 127.0.0.1:5001, advertising localhost:5001
+[rqlited] 2024/03/01 09:54:33 preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node1
+[cluster] 2024/03/01 09:54:33 service listening on localhost:5001
+[rqlited] 2024/03/01 09:54:33 cluster TCP mux Listener registered with byte header 2
+[http] 2024/03/01 09:54:33 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
+[http] 2024/03/01 09:54:33 service listening on 127.0.0.1:4001
+[store] 2024/03/01 09:54:33 opening store with node ID localhost:5001, listening on localhost:5001
+[store] 2024/03/01 09:54:33 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node1
+[store] 2024/03/01 09:54:33 old snapshot directory C:\Projects\rqlite-throubleshoot\Node1\snapshots does not exist, nothing to upgrade
+[snapshot-store] 2024/03/01 09:54:33 store initialized using C:\Projects\rqlite-throubleshoot\Node1\rsnapshots
+[snapshot-store] 2024/03/01 09:54:33 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node1\rsnapshots
+[snapshot-store] 2024/03/01 09:54:33 check complete
+[store] 2024/03/01 09:54:33 0 preexisting snapshots present
+[store] 2024/03/01 09:54:33 attempting node recovery using C:\Projects\rqlite-throubleshoot\Node1\raft\peers.json
+[store] [recovery] 2024/03/01 09:54:33 recovery detected 0 snapshots
+[store] [recovery] 2024/03/01 09:54:33 last index is 0, last index written to log is 2
+[store] [recovery] 2024/03/01 09:54:33 recovery snapshot created successfully using C:\Projects\rqlite-throubleshoot\Node1\recovery.db
+[store] 2024/03/01 09:54:33 node recovered successfully using C:\Projects\rqlite-throubleshoot\Node1\raft\peers.json
+[raft] 2024/03/01 09:54:33 [INFO]  starting restore from snapshot: id=2-2-1709297673854 last-index=2 last-term=2 size-in-bytes=4096
+[store] 2024/03/01 09:54:33 initiating node restore on node ID localhost:5001
+[store] 2024/03/01 09:54:34 successfully opened database at C:\Projects\rqlite-throubleshoot\Node1\db.sqlite due to restore
+[store] 2024/03/01 09:54:34 node restored in 15.1465ms
+[raft] 2024/03/01 09:54:34 [INFO]  snapshot restore progress: id=2-2-1709297673854 last-index=2 last-term=2 size-in-bytes=4096 read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/01 09:54:34 [INFO]  restored from snapshot: id=2-2-1709297673854 last-index=2 last-term=2 size-in-bytes=4096
+[raft] 2024/03/01 09:54:34 [INFO]  initial configuration: index=1 servers="[{Suffrage:Voter ID:localhost:5001 Address:localhost:5001} {Suffrage:Voter ID:localhost:5002 Address:localhost:5002} {Suffrage:Voter ID:localhost:5003 Address:localhost:5003}]"
+[raft] 2024/03/01 09:54:34 [INFO]  entering follower state: follower="Node at localhost:5001 [Follower]" leader-address= leader-id=
+[rqlited] 2024/03/01 09:54:34 checking that any supplied join addresses don't serve HTTP(S)
+[rqlited] 2024/03/01 09:54:34 node HTTP API available at http://localhost:4001
+[rqlited] 2024/03/01 09:54:34 connect using the command-line tool via 'rqlite -H localhost -p 4001'
+[raft] 2024/03/01 09:54:36 [WARN]  heartbeat timeout reached, starting election: last-leader-addr= last-leader-id=
+[raft] 2024/03/01 09:54:36 [INFO]  entering candidate state: node="Node at localhost:5001 [Candidate]" term=3
+[raft] 2024/03/01 09:54:36 [DEBUG] voting for self: term=3 id=localhost:5001
+[raft] 2024/03/01 09:54:36 [DEBUG] asking for vote: term=3 from=localhost:5002 address=localhost:5002
+[raft] 2024/03/01 09:54:36 [DEBUG] asking for vote: term=3 from=localhost:5003 address=localhost:5003
+[raft] 2024/03/01 09:54:36 [DEBUG] calculated votes needed: needed=2 term=3
+[raft] 2024/03/01 09:54:36 [DEBUG] vote granted: from=localhost:5001 term=3 tally=1
+[raft] 2024/03/01 09:54:36 [DEBUG] lost leadership because received a requestVote with a newer term
+[raft] 2024/03/01 09:54:36 [INFO]  entering follower state: follower="Node at localhost:5001 [Follower]" leader-address= leader-id=
+[rqlited] 2024/03/01 09:55:36 received signal "interrupt"
+[http] 2024/03/01 09:55:36 closing HTTP service on 127.0.0.1:4001
+[http] 2024/03/01 09:55:36 HTTP service on 127.0.0.1:4001 stopped: http: Server closed
+[store] 2024/03/01 09:55:36 store closed with node ID localhost:5001, listening on localhost:5001
+[rqlited] 2024/03/01 09:55:36 rqlite server stopped
