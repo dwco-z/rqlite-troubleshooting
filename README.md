@@ -12,4 +12,4 @@ Issue: [https://github.com/rqlite/rqlite/issues/1711](https://github.com/rqlite/
 
     ``` python main.py ```
 
-- Refer to the generated rqlited.log to inspect the error
+- Refer to the generated node1.log, node2.log and node3.log to inspect the error
