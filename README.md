@@ -1,6 +1,6 @@
 # Rqlite Bug Throubleshooting
 
-Issue: https://github.com/rqlite/rqlite/issues/1581
+Issue: [https://github.com/rqlite/rqlite/issues/1711](https://github.com/rqlite/rqlite/issues/1711)
 
 ## Install Requirements
 ``` pip install -r requirements ```
