@@ -8,76 +8,70 @@
          | |               www.rqlite.io
          |_|
 
-[rqlited] 2024/03/01 09:54:28 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
-[rqlited] 2024/03/01 09:54:28 go1.21.4, target architecture is amd64, operating system target is windows
-[rqlited] 2024/03/01 09:54:28 launch command: rqlited.exe -http-addr=localhost:4002 -raft-addr=localhost:5002 -raft-log-level=DEBUG -raft-timeout=2s -bootstrap-expect=3 -join=localhost:5001,localhost:5002,localhost:5003 -raft-election-timeout=10s Node2
-[rqlited] 2024/03/01 09:54:28 Raft TCP mux Listener registered with byte header 1
-[mux] 2024/03/01 09:54:28 mux serving on 127.0.0.1:5002, advertising localhost:5002
-[rqlited] 2024/03/01 09:54:28 no preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node2, node may be bootstrapping
-[cluster] 2024/03/01 09:54:28 service listening on localhost:5002
-[rqlited] 2024/03/01 09:54:28 cluster TCP mux Listener registered with byte header 2
-[http] 2024/03/01 09:54:28 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
-[http] 2024/03/01 09:54:28 service listening on 127.0.0.1:4002
-[store] 2024/03/01 09:54:28 opening store with node ID localhost:5002, listening on localhost:5002
-[store] 2024/03/01 09:54:28 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node2
-[store] 2024/03/01 09:54:28 old snapshot directory C:\Projects\rqlite-throubleshoot\Node2\snapshots does not exist, nothing to upgrade
-[snapshot-store] 2024/03/01 09:54:28 store initialized using C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
-[snapshot-store] 2024/03/01 09:54:28 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
-[snapshot-store] 2024/03/01 09:54:28 check complete
-[store] 2024/03/01 09:54:28 0 preexisting snapshots present
-[raft] 2024/03/01 09:54:28 [INFO]  initial configuration: index=0 servers=[]
-[raft] 2024/03/01 09:54:28 [INFO]  entering follower state: follower="Node at localhost:5002 [Follower]" leader-address= leader-id=
-[rqlited] 2024/03/01 09:54:28 checking that any supplied join addresses don't serve HTTP(S)
-[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62868: 71 (unsupported protocol?)
-[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62871: 22 (unsupported protocol?)
-[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62877: 71 (unsupported protocol?)
-[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62881: 22 (unsupported protocol?)
-[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5001: no leader
-[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62920: 71 (unsupported protocol?)
-[mux] 2024/03/01 09:54:28 handler not registered for request from 127.0.0.1:62928: 22 (unsupported protocol?)
-[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5002: no leader
-[cluster-join] 2024/03/01 09:54:28 failed to join via node at localhost:5003: no leader
-[cluster-join] 2024/03/01 09:54:28 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
-[cluster-bootstrap] 2024/03/01 09:54:28 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
-[store] 2024/03/01 09:54:28 reached expected bootstrap count of 3, starting cluster bootstrap
-[store] 2024/03/01 09:54:28 cluster bootstrap successful, servers: [{Voter localhost:5003 localhost:5003} {Voter localhost:5002 localhost:5002} {Voter localhost:5001 localhost:5001}]
-[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5001: no leader
-[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5002: no leader
-[cluster-join] 2024/03/01 09:54:30 failed to join via node at localhost:5003: no leader
-[cluster-join] 2024/03/01 09:54:30 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
-[cluster-bootstrap] 2024/03/01 09:54:30 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
-[raft] 2024/03/01 09:54:31 [WARN]  heartbeat timeout reached, starting election: last-leader-addr= last-leader-id=
-[raft] 2024/03/01 09:54:31 [INFO]  entering candidate state: node="Node at localhost:5002 [Candidate]" term=2
-[raft] 2024/03/01 09:54:31 [DEBUG] asking for vote: term=2 from=localhost:5003 address=localhost:5003
-[raft] 2024/03/01 09:54:31 [DEBUG] voting for self: term=2 id=localhost:5002
-[raft] 2024/03/01 09:54:31 [DEBUG] asking for vote: term=2 from=localhost:5001 address=localhost:5001
-[raft] 2024/03/01 09:54:31 [DEBUG] calculated votes needed: needed=2 term=2
-[raft] 2024/03/01 09:54:31 [DEBUG] vote granted: from=localhost:5002 term=2 tally=1
-[raft] 2024/03/01 09:54:31 [DEBUG] vote granted: from=localhost:5003 term=2 tally=2
-[raft] 2024/03/01 09:54:31 [INFO]  election won: term=2 tally=2
-[raft] 2024/03/01 09:54:31 [INFO]  entering leader state: leader="Node at localhost:5002 [Leader]"
-[raft] 2024/03/01 09:54:31 [INFO]  added peer, starting replication: peer=localhost:5003
-[raft] 2024/03/01 09:54:31 [INFO]  added peer, starting replication: peer=localhost:5001
-[raft] 2024/03/01 09:54:31 [INFO]  pipelining replication: peer="{Voter localhost:5003 localhost:5003}"
-[raft] 2024/03/01 09:54:31 [INFO]  pipelining replication: peer="{Voter localhost:5001 localhost:5001}"
-[rqlited] 2024/03/01 09:54:33 received signal "interrupt"
-[raft] 2024/03/01 09:54:33 [ERROR] failed to pipeline appendEntries: peer="{Voter localhost:5001 localhost:5001}" error="write tcp 127.0.0.1:62983->127.0.0.1:5001: wsasend: An existing connection was forcibly closed by the remote host."
-[raft] 2024/03/01 09:54:33 [INFO]  aborting pipeline replication: peer="{Voter localhost:5001 localhost:5001}"
-[cluster-bootstrap] 2024/03/01 09:54:33 boot operation marked done
-[rqlited] 2024/03/01 09:54:33 node HTTP API available at http://localhost:4002
-[rqlited] 2024/03/01 09:54:33 connect using the command-line tool via 'rqlite -H localhost -p 4002'
-[http] 2024/03/01 09:54:33 closing HTTP service on 127.0.0.1:4002
-[http] 2024/03/01 09:54:33 HTTP service on 127.0.0.1:4002 stopped: http: Server closed
-[rqlited] 2024/03/01 09:54:33 stepping down as Leader before shutdown
-[raft] 2024/03/01 09:54:33 [DEBUG] starting leadership transfer: id=<nil> address=<nil>
-[raft] 2024/03/01 09:54:33 [ERROR] failed to appendEntries to: peer="{Voter localhost:5001 localhost:5001}" error="write tcp 127.0.0.1:62981->127.0.0.1:5001: wsasend: An existing connection was forcibly closed by the remote host."
-[raft] 2024/03/01 09:54:33 [DEBUG] lost leadership because received a requestVote with a newer term
-[raft] 2024/03/01 09:54:33 [INFO]  entering follower state: follower="Node at localhost:5002 [Follower]" leader-address= leader-id=
-[raft] 2024/03/01 09:54:33 [DEBUG] lost leadership during transfer (expected)
-[raft] 2024/03/01 09:54:33 [INFO]  aborting pipeline replication: peer="{Voter localhost:5003 localhost:5003}"
-2024-03-01T09:54:33.212-0300 [ERROR] raft-net: failed to decode incoming command: error="transport shutdown"
-[store] 2024/03/01 09:54:33 store closed with node ID localhost:5002, listening on localhost:5002
-[rqlited] 2024/03/01 09:54:33 rqlite server stopped
+[rqlited] 2024/03/05 09:52:41 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
+[rqlited] 2024/03/05 09:52:41 go1.21.4, target architecture is amd64, operating system target is windows
+[rqlited] 2024/03/05 09:52:41 launch command: rqlited.exe -http-addr=localhost:4002 -raft-addr=localhost:5002 -raft-log-level=DEBUG -raft-timeout=2s -bootstrap-expect=3 -join=localhost:5001,localhost:5002,localhost:5003 -raft-election-timeout=10s Node2
+[rqlited] 2024/03/05 09:52:41 Raft TCP mux Listener registered with byte header 1
+[rqlited] 2024/03/05 09:52:41 no preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node2, node may be bootstrapping
+[cluster] 2024/03/05 09:52:41 service listening on localhost:5002
+[rqlited] 2024/03/05 09:52:41 cluster TCP mux Listener registered with byte header 2
+[mux] 2024/03/05 09:52:41 mux serving on 127.0.0.1:5002, advertising localhost:5002
+[http] 2024/03/05 09:52:41 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
+[http] 2024/03/05 09:52:41 service listening on 127.0.0.1:4002
+[store] 2024/03/05 09:52:41 opening store with node ID localhost:5002, listening on localhost:5002
+[store] 2024/03/05 09:52:41 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node2
+[store] 2024/03/05 09:52:41 old snapshot directory C:\Projects\rqlite-throubleshoot\Node2\snapshots does not exist, nothing to upgrade
+[snapshot-store] 2024/03/05 09:52:41 store initialized using C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
+[snapshot-store] 2024/03/05 09:52:41 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
+[snapshot-store] 2024/03/05 09:52:41 check complete
+[store] 2024/03/05 09:52:41 0 preexisting snapshots present
+[mux] 2024/03/05 09:52:41 handler not registered for request from 127.0.0.1:61414: 71 (unsupported protocol?)
+[raft] 2024/03/05 09:52:41 [INFO]  initial configuration: index=0 servers=[]
+[raft] 2024/03/05 09:52:41 [INFO]  entering follower state: follower="Node at localhost:5002 [Follower]" leader-address= leader-id=
+[mux] 2024/03/05 09:52:41 handler not registered for request from 127.0.0.1:61416: 22 (unsupported protocol?)
+[rqlited] 2024/03/05 09:52:41 checking that supplied join addresses don't serve HTTP(S)
+[mux] 2024/03/05 09:52:41 handler not registered for request from 127.0.0.1:61430: 71 (unsupported protocol?)
+[mux] 2024/03/05 09:52:41 handler not registered for request from 127.0.0.1:61432: 71 (unsupported protocol?)
+[mux] 2024/03/05 09:52:41 handler not registered for request from 127.0.0.1:61434: 22 (unsupported protocol?)
+[mux] 2024/03/05 09:52:41 handler not registered for request from 127.0.0.1:61437: 22 (unsupported protocol?)
+[cluster-join] 2024/03/05 09:52:41 failed to join via node at localhost:5001: no leader
+[cluster-join] 2024/03/05 09:52:41 failed to join via node at localhost:5002: no leader
+[cluster-join] 2024/03/05 09:52:41 failed to join via node at localhost:5003: no leader
+[cluster-join] 2024/03/05 09:52:41 failed to join cluster at [localhost:5001 localhost:5002 localhost:5003], after 1 attempt(s)
+[store] 2024/03/05 09:52:41 reached expected bootstrap count of 3, starting cluster bootstrap
+[store] 2024/03/05 09:52:41 cluster bootstrap successful, servers: [{Voter localhost:5003 localhost:5003} {Voter localhost:5002 localhost:5002} {Voter localhost:5001 localhost:5001}]
+[cluster-bootstrap] 2024/03/05 09:52:41 succeeded notifying all targets: [localhost:5001 localhost:5002 localhost:5003]
+[raft] 2024/03/05 09:52:43 [WARN]  heartbeat timeout reached, starting election: last-leader-addr= last-leader-id=
+[raft] 2024/03/05 09:52:43 [INFO]  entering candidate state: node="Node at localhost:5002 [Candidate]" term=2
+[raft] 2024/03/05 09:52:43 [DEBUG] asking for vote: term=2 from=localhost:5003 address=localhost:5003
+[raft] 2024/03/05 09:52:43 [DEBUG] voting for self: term=2 id=localhost:5002
+[raft] 2024/03/05 09:52:43 [DEBUG] asking for vote: term=2 from=localhost:5001 address=localhost:5001
+[raft] 2024/03/05 09:52:43 [DEBUG] calculated votes needed: needed=2 term=2
+[raft] 2024/03/05 09:52:43 [DEBUG] vote granted: from=localhost:5002 term=2 tally=1
+[raft] 2024/03/05 09:52:43 [DEBUG] vote granted: from=localhost:5003 term=2 tally=2
+[raft] 2024/03/05 09:52:43 [INFO]  election won: term=2 tally=2
+[raft] 2024/03/05 09:52:43 [INFO]  entering leader state: leader="Node at localhost:5002 [Leader]"
+[raft] 2024/03/05 09:52:43 [INFO]  added peer, starting replication: peer=localhost:5003
+[raft] 2024/03/05 09:52:43 [INFO]  added peer, starting replication: peer=localhost:5001
+[raft] 2024/03/05 09:52:43 [INFO]  pipelining replication: peer="{Voter localhost:5003 localhost:5003}"
+[raft] 2024/03/05 09:52:43 [INFO]  pipelining replication: peer="{Voter localhost:5001 localhost:5001}"
+[cluster-bootstrap] 2024/03/05 09:52:44 boot operation marked done
+[rqlited] 2024/03/05 09:52:44 node HTTP API available at http://localhost:4002
+[rqlited] 2024/03/05 09:52:44 connect using the command-line tool via 'rqlite -H localhost -p 4002'
+[rqlited] 2024/03/05 09:52:46 received signal "interrupt"
+[http] 2024/03/05 09:52:46 closing HTTP service on 127.0.0.1:4002
+[http] 2024/03/05 09:52:46 HTTP service on 127.0.0.1:4002 stopped: http: Server closed
+[rqlited] 2024/03/05 09:52:46 stepping down as Leader before shutdown
+[raft] 2024/03/05 09:52:46 [DEBUG] starting leadership transfer: id=<nil> address=<nil>
+[raft] 2024/03/05 09:52:46 [DEBUG] lost leadership because received a requestVote with a newer term
+[raft] 2024/03/05 09:52:46 [INFO]  entering follower state: follower="Node at localhost:5002 [Follower]" leader-address= leader-id=
+[raft] 2024/03/05 09:52:46 [DEBUG] lost leadership during transfer (expected)
+[raft] 2024/03/05 09:52:46 [INFO]  aborting pipeline replication: peer="{Voter localhost:5001 localhost:5001}"
+[raft] 2024/03/05 09:52:46 [INFO]  aborting pipeline replication: peer="{Voter localhost:5003 localhost:5003}"
+[raft] 2024/03/05 09:52:46 [ERROR] failed to heartbeat to: peer=localhost:5001 backoff time=10ms error="write tcp 127.0.0.1:61523->127.0.0.1:5001: wsasend: An existing connection was forcibly closed by the remote host."
+2024-03-05T09:52:46.125-0300 [ERROR] raft-net: failed to decode incoming command: error="transport shutdown"
+[store] 2024/03/05 09:52:46 store closed with node ID localhost:5002, listening on localhost:5002
+[rqlited] 2024/03/05 09:52:46 rqlite server stopped
 
             _ _ _
            | (_) |
@@ -88,112 +82,112 @@
          | |               www.rqlite.io
          |_|
 
-[rqlited] 2024/03/01 09:54:33 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
-[rqlited] 2024/03/01 09:54:33 go1.21.4, target architecture is amd64, operating system target is windows
-[rqlited] 2024/03/01 09:54:33 launch command: rqlited.exe -http-addr=localhost:4002 -raft-addr=localhost:5002 -raft-log-level=DEBUG -raft-timeout=2s -raft-election-timeout=10s Node2
-[mux] 2024/03/01 09:54:33 mux serving on 127.0.0.1:5002, advertising localhost:5002
-[rqlited] 2024/03/01 09:54:33 Raft TCP mux Listener registered with byte header 1
-[rqlited] 2024/03/01 09:54:33 preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node2
-[cluster] 2024/03/01 09:54:33 service listening on localhost:5002
-[rqlited] 2024/03/01 09:54:33 cluster TCP mux Listener registered with byte header 2
-[http] 2024/03/01 09:54:33 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
-[http] 2024/03/01 09:54:33 service listening on 127.0.0.1:4002
-[store] 2024/03/01 09:54:33 opening store with node ID localhost:5002, listening on localhost:5002
-[store] 2024/03/01 09:54:33 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node2
-[store] 2024/03/01 09:54:33 old snapshot directory C:\Projects\rqlite-throubleshoot\Node2\snapshots does not exist, nothing to upgrade
-[snapshot-store] 2024/03/01 09:54:33 store initialized using C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
-[snapshot-store] 2024/03/01 09:54:33 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
-[snapshot-store] 2024/03/01 09:54:33 check complete
-[store] 2024/03/01 09:54:33 0 preexisting snapshots present
-[store] 2024/03/01 09:54:33 attempting node recovery using C:\Projects\rqlite-throubleshoot\Node2\raft\peers.json
-[store] [recovery] 2024/03/01 09:54:33 recovery detected 0 snapshots
-[store] [recovery] 2024/03/01 09:54:33 last index is 0, last index written to log is 2
-[store] [recovery] 2024/03/01 09:54:33 recovery snapshot created successfully using C:\Projects\rqlite-throubleshoot\Node2\recovery.db
-[store] 2024/03/01 09:54:33 node recovered successfully using C:\Projects\rqlite-throubleshoot\Node2\raft\peers.json
-[raft] 2024/03/01 09:54:34 [INFO]  starting restore from snapshot: id=2-2-1709297673889 last-index=2 last-term=2 size-in-bytes=4096
-[store] 2024/03/01 09:54:34 initiating node restore on node ID localhost:5002
-[store] 2024/03/01 09:54:34 successfully opened database at C:\Projects\rqlite-throubleshoot\Node2\db.sqlite due to restore
-[store] 2024/03/01 09:54:34 node restored in 13.4893ms
-[raft] 2024/03/01 09:54:34 [INFO]  snapshot restore progress: id=2-2-1709297673889 last-index=2 last-term=2 size-in-bytes=4096 read-bytes=4096 percent-complete="100.00%"
-[raft] 2024/03/01 09:54:34 [INFO]  restored from snapshot: id=2-2-1709297673889 last-index=2 last-term=2 size-in-bytes=4096
-[raft] 2024/03/01 09:54:34 [INFO]  initial configuration: index=1 servers="[{Suffrage:Voter ID:localhost:5001 Address:localhost:5001} {Suffrage:Voter ID:localhost:5002 Address:localhost:5002} {Suffrage:Voter ID:localhost:5003 Address:localhost:5003}]"
-[raft] 2024/03/01 09:54:34 [INFO]  entering follower state: follower="Node at localhost:5002 [Follower]" leader-address= leader-id=
-[rqlited] 2024/03/01 09:54:34 checking that any supplied join addresses don't serve HTTP(S)
-[rqlited] 2024/03/01 09:54:34 node HTTP API available at http://localhost:4002
-[rqlited] 2024/03/01 09:54:34 connect using the command-line tool via 'rqlite -H localhost -p 4002'
-[raft] 2024/03/01 09:54:36 [INFO]  duplicate requestVote for same term: term=3
-[raft] 2024/03/01 09:54:36 [WARN]  heartbeat timeout reached, starting election: last-leader-addr= last-leader-id=
-[raft] 2024/03/01 09:54:36 [INFO]  entering candidate state: node="Node at localhost:5002 [Candidate]" term=4
-[raft] 2024/03/01 09:54:36 [DEBUG] asking for vote: term=4 from=localhost:5001 address=localhost:5001
-[raft] 2024/03/01 09:54:36 [DEBUG] voting for self: term=4 id=localhost:5002
-[raft] 2024/03/01 09:54:36 [DEBUG] asking for vote: term=4 from=localhost:5003 address=localhost:5003
-[raft] 2024/03/01 09:54:36 [DEBUG] calculated votes needed: needed=2 term=4
-[raft] 2024/03/01 09:54:36 [DEBUG] vote granted: from=localhost:5002 term=4 tally=1
-[raft] 2024/03/01 09:54:36 [DEBUG] vote granted: from=localhost:5001 term=4 tally=2
-[raft] 2024/03/01 09:54:36 [INFO]  election won: term=4 tally=2
-[raft] 2024/03/01 09:54:36 [INFO]  entering leader state: leader="Node at localhost:5002 [Leader]"
-[raft] 2024/03/01 09:54:36 [INFO]  added peer, starting replication: peer=localhost:5001
-[raft] 2024/03/01 09:54:36 [INFO]  added peer, starting replication: peer=localhost:5003
-[raft] 2024/03/01 09:54:36 [INFO]  pipelining replication: peer="{Voter localhost:5001 localhost:5001}"
-[raft] 2024/03/01 09:54:36 [WARN]  appendEntries rejected, sending older logs: peer="{Voter localhost:5003 localhost:5003}" next=2
-[raft] 2024/03/01 09:54:36 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:36 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297676855\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:36 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297676855\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:36 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:37 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297676989\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297676989\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:37 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677098\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677098\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:37 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677239\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677239\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:37 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677378\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677378\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:37 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677564\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677564\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:37 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677828\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:37 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297677828\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:38 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:38 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297678280\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:38 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297678280\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:39 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:39 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297679042\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:39 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297679042\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:40 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:40 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297680414\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:40 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297680414\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:43 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:43 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297683109\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:43 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297683109\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:48 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:48 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297688364\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:48 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297688364\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:58 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:54:58 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297698739\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:54:58 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297698739\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:09 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:55:09 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297709070\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:09 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297709070\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:19 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:55:19 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297719443\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:19 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297719443\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:29 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:55:29 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297729825\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:29 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297729825\meta.json: The system cannot find the path specified."
-2024-03-01T09:55:36.733-0300 [ERROR] raft-net: failed to decode incoming command: error="read tcp 127.0.0.1:5002->127.0.0.1:63037: wsarecv: An existing connection was forcibly closed by the remote host."
-[rqlited] 2024/03/01 09:55:36 received signal "interrupt"
-[http] 2024/03/01 09:55:36 closing HTTP service on 127.0.0.1:4002
-[http] 2024/03/01 09:55:36 HTTP service on 127.0.0.1:4002 stopped: http: Server closed
-[rqlited] 2024/03/01 09:55:36 stepping down as Leader before shutdown
-[raft] 2024/03/01 09:55:36 [DEBUG] starting leadership transfer: id=<nil> address=<nil>
-[raft] 2024/03/01 09:55:36 [DEBUG] failed to make TimeoutNow RPC to localhost:5001: write tcp 127.0.0.1:63049->127.0.0.1:5001: wsasend: An existing connection was forcibly closed by the remote host.
-[raft] 2024/03/01 09:55:36 [INFO]  aborting pipeline replication: peer="{Voter localhost:5001 localhost:5001}"
-[raft] 2024/03/01 09:55:36 [ERROR] failed to get log: index=1 error="log not found"
-[raft] 2024/03/01 09:55:36 [ERROR] failed to install snapshot: id=2-2-1709297673889 error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297736739\meta.json: The system cannot find the path specified."
-[raft] 2024/03/01 09:55:36 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to update snapshot meta size: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709297736739\meta.json: The system cannot find the path specified."
-[store] 2024/03/01 09:55:36 store closed with node ID localhost:5002, listening on localhost:5002
-[rqlited] 2024/03/01 09:55:36 rqlite server stopped
+[rqlited] 2024/03/05 09:52:46 rqlited starting, version 8, SQLite 3.45.1, commit unknown, branch unknown, compiler gc
+[rqlited] 2024/03/05 09:52:46 go1.21.4, target architecture is amd64, operating system target is windows
+[rqlited] 2024/03/05 09:52:46 launch command: rqlited.exe -http-addr=localhost:4002 -raft-addr=localhost:5002 -raft-log-level=DEBUG -raft-timeout=2s -raft-election-timeout=10s Node2
+[rqlited] 2024/03/05 09:52:46 Raft TCP mux Listener registered with byte header 1
+[mux] 2024/03/05 09:52:46 mux serving on 127.0.0.1:5002, advertising localhost:5002
+[rqlited] 2024/03/05 09:52:46 preexisting node state detected in C:\Projects\rqlite-throubleshoot\Node2
+[cluster] 2024/03/05 09:52:46 service listening on localhost:5002
+[rqlited] 2024/03/05 09:52:46 cluster TCP mux Listener registered with byte header 2
+[http] 2024/03/05 09:52:46 execute queue processing started with capacity 1024, batch size 128, timeout 50ms
+[http] 2024/03/05 09:52:46 service listening on 127.0.0.1:4002
+[store] 2024/03/05 09:52:46 opening store with node ID localhost:5002, listening on localhost:5002
+[store] 2024/03/05 09:52:46 ensuring data directory exists at C:\Projects\rqlite-throubleshoot\Node2
+[store] 2024/03/05 09:52:46 old snapshot directory C:\Projects\rqlite-throubleshoot\Node2\snapshots does not exist, nothing to upgrade
+[snapshot-store] 2024/03/05 09:52:46 store initialized using C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
+[snapshot-store] 2024/03/05 09:52:46 checking consistency of snapshot store at C:\Projects\rqlite-throubleshoot\Node2\rsnapshots
+[snapshot-store] 2024/03/05 09:52:46 check complete
+[store] 2024/03/05 09:52:46 0 preexisting snapshots present
+[store] 2024/03/05 09:52:46 attempting node recovery using C:\Projects\rqlite-throubleshoot\Node2\raft\peers.json
+[store] [recovery] 2024/03/05 09:52:46 recovery detected 0 snapshots
+[store] [recovery] 2024/03/05 09:52:46 last index is 0, last index written to log is 2
+[store] [recovery] 2024/03/05 09:52:46 recovery snapshot created successfully using C:\Projects\rqlite-throubleshoot\Node2\recovery.db
+[store] 2024/03/05 09:52:46 node recovered successfully using C:\Projects\rqlite-throubleshoot\Node2\raft\peers.json
+[raft] 2024/03/05 09:52:46 [INFO]  starting restore from snapshot: id=2-2-1709643166768 last-index=2 last-term=2 size-in-bytes=4096
+[store] 2024/03/05 09:52:46 initiating node restore on node ID localhost:5002
+[store] 2024/03/05 09:52:46 successfully opened database at C:\Projects\rqlite-throubleshoot\Node2\db.sqlite due to restore
+[store] 2024/03/05 09:52:46 node restored in 9.1202ms
+[raft] 2024/03/05 09:52:46 [INFO]  snapshot restore progress: id=2-2-1709643166768 last-index=2 last-term=2 size-in-bytes=4096 read-bytes=4096 percent-complete="100.00%"
+[raft] 2024/03/05 09:52:46 [INFO]  restored from snapshot: id=2-2-1709643166768 last-index=2 last-term=2 size-in-bytes=4096
+[raft] 2024/03/05 09:52:46 [INFO]  initial configuration: index=1 servers="[{Suffrage:Voter ID:localhost:5001 Address:localhost:5001} {Suffrage:Voter ID:localhost:5002 Address:localhost:5002} {Suffrage:Voter ID:localhost:5003 Address:localhost:5003}]"
+[raft] 2024/03/05 09:52:46 [INFO]  entering follower state: follower="Node at localhost:5002 [Follower]" leader-address= leader-id=
+[rqlited] 2024/03/05 09:52:46 node HTTP API available at http://localhost:4002
+[rqlited] 2024/03/05 09:52:46 connect using the command-line tool via 'rqlite -H localhost -p 4002'
+[raft] 2024/03/05 09:52:49 [INFO]  duplicate requestVote for same term: term=3
+[raft] 2024/03/05 09:52:49 [WARN]  heartbeat timeout reached, starting election: last-leader-addr= last-leader-id=
+[raft] 2024/03/05 09:52:49 [INFO]  entering candidate state: node="Node at localhost:5002 [Candidate]" term=4
+[raft] 2024/03/05 09:52:49 [DEBUG] asking for vote: term=4 from=localhost:5001 address=localhost:5001
+[raft] 2024/03/05 09:52:49 [DEBUG] voting for self: term=4 id=localhost:5002
+[raft] 2024/03/05 09:52:49 [DEBUG] asking for vote: term=4 from=localhost:5003 address=localhost:5003
+[raft] 2024/03/05 09:52:49 [DEBUG] calculated votes needed: needed=2 term=4
+[raft] 2024/03/05 09:52:49 [DEBUG] vote granted: from=localhost:5002 term=4 tally=1
+[raft] 2024/03/05 09:52:49 [DEBUG] vote granted: from=localhost:5001 term=4 tally=2
+[raft] 2024/03/05 09:52:49 [INFO]  election won: term=4 tally=2
+[raft] 2024/03/05 09:52:49 [INFO]  entering leader state: leader="Node at localhost:5002 [Leader]"
+[raft] 2024/03/05 09:52:49 [INFO]  added peer, starting replication: peer=localhost:5001
+[raft] 2024/03/05 09:52:49 [INFO]  added peer, starting replication: peer=localhost:5003
+[raft] 2024/03/05 09:52:49 [WARN]  appendEntries rejected, sending older logs: peer="{Voter localhost:5003 localhost:5003}" next=2
+[raft] 2024/03/05 09:52:49 [INFO]  pipelining replication: peer="{Voter localhost:5001 localhost:5001}"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643169116: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169116\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643169116: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169116\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643169247: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169247\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643169247: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169247\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643169370: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169370\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643169370: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169370\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643169492: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169492\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643169492: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169492\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643169647: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169647\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643169647: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169647\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643169847: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169847\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643169847: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643169847\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:50 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:50 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643170111: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643170111\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:50 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643170111: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643170111\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:50 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:50 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643170550: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643170550\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:50 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643170550: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643170550\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:51 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:51 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643171326: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643171326\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:51 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643171326: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643171326\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:52 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:52 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643172720: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643172720\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:52 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643172720: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643172720\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:55 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:52:55 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643175384: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643175384\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:52:55 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643175384: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643175384\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:00 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:53:00 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643180617: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643180617\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:00 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643180617: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643180617\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:10 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:53:10 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643190959: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643190959\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:10 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643190959: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643190959\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:21 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:53:21 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643201302: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643201302\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:21 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643201302: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643201302\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:31 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:53:31 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643211681: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643211681\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:31 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643211681: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643211681\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:42 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:53:42 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643222026: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643222026\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:42 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643222026: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643222026\meta.json: The system cannot find the path specified."
+2024-03-05T09:53:49.684-0300 [ERROR] raft-net: failed to decode incoming command: error="read tcp 127.0.0.1:5002->127.0.0.1:61580: wsarecv: An existing connection was forcibly closed by the remote host."
+[raft] 2024/03/05 09:53:49 [ERROR] failed to pipeline appendEntries: peer="{Voter localhost:5001 localhost:5001}" error="write tcp 127.0.0.1:61583->127.0.0.1:5001: wsasend: An existing connection was forcibly closed by the remote host."
+[raft] 2024/03/05 09:53:49 [INFO]  aborting pipeline replication: peer="{Voter localhost:5001 localhost:5001}"
+[rqlited] 2024/03/05 09:53:49 received signal "interrupt"
+[http] 2024/03/05 09:53:49 closing HTTP service on 127.0.0.1:4002
+[http] 2024/03/05 09:53:49 HTTP service on 127.0.0.1:4002 stopped: http: Server closed
+[rqlited] 2024/03/05 09:53:49 stepping down as Leader before shutdown
+[raft] 2024/03/05 09:53:49 [DEBUG] starting leadership transfer: id=<nil> address=<nil>
+[raft] 2024/03/05 09:53:49 [DEBUG] failed to make TimeoutNow RPC to localhost:5001: write tcp 127.0.0.1:61596->127.0.0.1:5001: wsasend: An existing connection was forcibly closed by the remote host.
+[raft] 2024/03/05 09:53:49 [ERROR] failed to get log: index=1 error="log not found"
+[raft] 2024/03/05 09:53:49 [ERROR] failed to install snapshot: id=2-2-1709643166768 error="failed to open snapshot 2-2-1709643229693: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643229693\meta.json: The system cannot find the path specified."
+[raft] 2024/03/05 09:53:49 [ERROR] failed to send snapshot to: peer="{Voter localhost:5003 localhost:5003}" error="failed to open snapshot 2-2-1709643229693: open C:\Projects\rqlite-throubleshoot\Node3\rsnapshots\2-2-1709643229693\meta.json: The system cannot find the path specified."
+[store] 2024/03/05 09:53:49 store closed with node ID localhost:5002, listening on localhost:5002
+[rqlited] 2024/03/05 09:53:49 rqlite server stopped
