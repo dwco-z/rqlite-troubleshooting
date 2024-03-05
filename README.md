@@ -1,6 +1,6 @@
 # Rqlite Bug Throubleshooting
 
-Issue: https://github.com/rqlite/rqlite/issues/1581
+Issue: [https://github.com/rqlite/rqlite/issues/1711](https://github.com/rqlite/rqlite/issues/1711)
 
 ## Install Requirements
 ``` pip install -r requirements ```
@@ -12,4 +12,4 @@ Issue: https://github.com/rqlite/rqlite/issues/1581
 
     ``` python main.py ```
 
-- Refer to the generated rqlited.log to inspect the error
+- Refer to the generated node1.log, node2.log and node3.log to inspect the error
