@@ -8,7 +8,7 @@ import threading
 from rqlite_client import RqliteClient  # Replace with the actual module name
 
 class RqliteManager:
-    def __init__(self, data_path="DummyDatabase", host='localhost', http_port=4001, raft_port=4004, log_file="rqlited.log"):
+    def __init__(self, data_path="DummyDatabase", host='localhost', http_port=4001, raft_port=4004, log_file="rqlited.log", rqlited_path="rqlited.exe"):
         self.data_path = data_path
         self.log_file = log_file
         self.host = host
@@ -16,6 +16,7 @@ class RqliteManager:
         self.raft_port = raft_port
         self.process = None
         self.client = None
+        self.rqlited_path = rqlited_path
     
     def set_peers(self, peers: list):
         with open(os.path.join(self.data_path, "raft", 'peers.json'), 'w') as fp:
@@ -31,7 +32,7 @@ class RqliteManager:
     def start_rqlited(self, join_addresses=""):
         print('starting rqlited...')
         cmd = [
-            "rqlited.exe",  # Path to the rqlited executable
+            self.rqlited_path,  # Path to the rqlited executable
             f"-http-addr={self.host}:{self.http_port}",
             f"-raft-addr={self.host}:{self.raft_port}",
             f"-raft-log-level=DEBUG",
@@ -42,9 +43,10 @@ class RqliteManager:
         if join_addresses:
             cmd.insert(-2, f"-bootstrap-expect={len(join_addresses)}")
             cmd.insert(-2, "-join=" + ",".join(join_addresses))
-        # print(cmd)
-        # exit()
-        self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+        if os.name == 'nt':
+            self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+        else:
+            self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
         # Start a thread to asynchronously log stdout to a file
         self.log_thread = threading.Thread(target=self._log_stdout, daemon=True)
@@ -59,7 +61,10 @@ class RqliteManager:
     def stop_rqlited(self):
         print('stopping rqlited...')
         if self.process:
-            self.process.send_signal(signal.CTRL_BREAK_EVENT)
+            if os.name == 'nt':
+                self.process.send_signal(signal.CTRL_BREAK_EVENT)
+            else:
+                self.process.send_signal(signal.SIGINT)
             try:
                 self.process.wait(30)
             except:

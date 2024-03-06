@@ -69,9 +69,9 @@ if __name__ == '__main__':
             shutil.rmtree('Node2', ignore_errors=True)
             shutil.rmtree('Node3', ignore_errors=True)
 
-            node1Manager = RqliteManager(data_path="Node1", host='localhost', http_port=4001, raft_port=5001, log_file="node1.log")
-            node2Manager = RqliteManager(data_path="Node2", host='localhost', http_port=4002, raft_port=5002, log_file="node2.log")
-            node3Manager = RqliteManager(data_path="Node3", host='localhost', http_port=4003, raft_port=5003, log_file="node3.log")
+            node1Manager = RqliteManager(data_path="Node1", host='localhost', http_port=4001, raft_port=5001, log_file="node1.log", rqlited_path="rqlited.exe")
+            node2Manager = RqliteManager(data_path="Node2", host='localhost', http_port=4002, raft_port=5002, log_file="node2.log", rqlited_path="rqlited.exe")
+            node3Manager = RqliteManager(data_path="Node3", host='localhost', http_port=4003, raft_port=5003, log_file="node3.log", rqlited_path="rqlited.exe")
             
             all_instances = (node1Manager, node2Manager, node3Manager)
             joinAddresses = [f"{manager.host}:{manager.raft_port}" for manager in all_instances]

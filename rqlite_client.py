@@ -13,7 +13,7 @@ class RqliteClient:
         return self.connection
 
     def execute_query(self, query):
-        with self.connection.cursor() as cursor:
+        with self.connect().cursor() as cursor:
             cursor.execute(query)
             return cursor.fetchall()
 
@@ -38,14 +38,16 @@ class RqliteClient:
         else:
             return 'Restore failed'
 
-    def is_leader_ready(self, timeout=60):
+    def is_leader_ready(self, timeout=60, sync=True):
         print('starting to check if leader is ready...')
         start_time = time.time()
-        ready_url = f'{self.base_url}/readyz?sync&timeout=5s'
+        ready_url = f'{self.base_url}/readyz'
+        if sync:
+            ready_url += "?sync&timeout=5s"
         while time.time() - start_time < timeout:
             try:
                 response = requests.get(ready_url)
-                if response.status_code == 200 and 'leader ok' in response.text and 'sync ok' in response.text:
+                if response.status_code == 200 and 'leader ok' in response.text and (not sync or sync and ('sync ok' in response.text)):
                     print('leader is ready!')
                     return True
                 else:
