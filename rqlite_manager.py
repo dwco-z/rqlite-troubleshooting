@@ -8,7 +8,7 @@ import threading
 from rqlite_client import RqliteClient  # Replace with the actual module name
 
 class RqliteManager:
-    def __init__(self, data_path="DummyDatabase", host='localhost', http_port=4001, raft_port=4004, log_file="rqlited.log", rqlited_path="rqlited.exe"):
+    def __init__(self, data_path="DummyDatabase", host='localhost', http_port=4001, raft_port=4004, log_file="rqlited.log", rqlited_path="rqlited.exe", raft_heartbeat_timeout=10, raft_election_timeout=20):
         self.data_path = data_path
         self.log_file = log_file
         self.host = host
@@ -17,7 +17,9 @@ class RqliteManager:
         self.process = None
         self.client = None
         self.rqlited_path = rqlited_path
-    
+        self.raft_heartbeat_timeout = raft_heartbeat_timeout
+        self.raft_election_timeout = raft_election_timeout
+
     def set_peers(self, peers: list):
         with open(os.path.join(self.data_path, "raft", 'peers.json'), 'w') as fp:
             json.dump(peers, fp)
@@ -36,8 +38,8 @@ class RqliteManager:
             f"-http-addr={self.host}:{self.http_port}",
             f"-raft-addr={self.host}:{self.raft_port}",
             f"-raft-log-level=DEBUG",
-            f"-raft-timeout=2s",
-            f"-raft-election-timeout=10s",
+            f"-raft-timeout={self.raft_heartbeat_timeout}s",
+            f"-raft-election-timeout={self.raft_election_timeout}s",
             self.data_path  # Data directory for rqlite
         ]
         if join_addresses:
@@ -68,7 +70,7 @@ class RqliteManager:
             try:
                 self.process.wait(30)
             except:
-                self.process.terminate()
+                self.process.kill()
             print('stopped!')
             self.process = None
 
