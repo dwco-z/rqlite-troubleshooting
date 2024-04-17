@@ -6,5 +6,5 @@ DummyDatabase
 Node1
 Node2
 Node3
-rqlited.exe
+*.exe
 rqlited.log

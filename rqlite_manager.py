@@ -1,11 +1,11 @@
+import time
+from rqlite_client import RqliteClient
 import signal
 import subprocess
 import os
 import json
-
 import subprocess
 import threading
-from rqlite_client import RqliteClient  # Replace with the actual module name
 
 class RqliteManager:
     def __init__(self, data_path="DummyDatabase", host='localhost', http_port=4001, raft_port=4004, log_file="rqlited.log", rqlited_path="rqlited.exe", raft_heartbeat_timeout=10, raft_election_timeout=20):
@@ -26,13 +26,16 @@ class RqliteManager:
 
     def get_peers_entry(self):
         return {
-            "id": f"{self.host}:{self.raft_port}",
+            "id": self.get_id(),
             "address": f"{self.host}:{self.raft_port}",
             "non_voter": False
         }
 
+    def get_id(self):
+        return f"{self.host}:{self.raft_port}"
+    
     def start_rqlited(self, join_addresses=""):
-        print('starting rqlited...')
+        print(f'starting rqlited [node id={self.get_id()}]...')
         cmd = [
             self.rqlited_path,  # Path to the rqlited executable
             f"-http-addr={self.host}:{self.http_port}",
@@ -40,11 +43,13 @@ class RqliteManager:
             f"-raft-log-level=DEBUG",
             f"-raft-timeout={self.raft_heartbeat_timeout}s",
             f"-raft-election-timeout={self.raft_election_timeout}s",
+            f"-cluster-connect-timeout=5s",
             self.data_path  # Data directory for rqlite
         ]
         if join_addresses:
             cmd.insert(-2, f"-bootstrap-expect={len(join_addresses)}")
             cmd.insert(-2, "-join=" + ",".join(join_addresses))
+            cmd.insert(-2, f"--join-attempts=50")
         if os.name == 'nt':
             self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
         else:
@@ -61,7 +66,7 @@ class RqliteManager:
             raise Exception('something is wrong, leader is not ready...')
 
     def stop_rqlited(self):
-        print('stopping rqlited...')
+        print(f'stopping rqlited instance [node id={self.get_id()}]...')
         if self.process:
             if os.name == 'nt':
                 self.process.send_signal(signal.CTRL_BREAK_EVENT)
@@ -89,5 +94,23 @@ class RqliteManager:
                         break
                 except:
                     break
+    
 
+    def restart(self):
+        self.stop_rqlited()
+        self.start_rqlited()
 
+    def get_nodes(self, display=False):
+        start = time.time()
+        nodes = self.client.nodes()
+        duration = time.time() - start
+        if display:
+            print("-- Nodes status --")
+            for nodes_response in nodes:
+                # remove irrelevant fields for this issue
+                nodes_response.pop("api_addr", None)
+                nodes_response.pop("addr", None)
+                nodes_response.pop("voter", None)
+                print(nodes_response)
+        print(f"finished /nodes [runtime={round(duration, 4)}]")
+        return nodes

@@ -9,7 +9,7 @@ class RqliteClient:
         self.base_url = f'http://{host}:{port}'
 
     def connect(self):
-        self.connection = connect(host=self.host, port=self.port)
+        self.connection = connect(scheme='http', host=self.host, port=self.port)
         return self.connection
 
     def execute_query(self, query):
@@ -26,7 +26,7 @@ class RqliteClient:
             return 'Backup successful'
         else:
             return 'Backup failed'
-
+               
     def restore(self, backup_file_path):
         print('starting restore...')
         restore_url = f'{self.base_url}/db/load'
@@ -58,3 +58,17 @@ class RqliteClient:
                 time.sleep(0.5)  # Wait and retry in case of a request exception
 
         return False
+
+    def nodes(self):
+        backup_url = f'{self.base_url}/nodes?nonvoters&ver=2&timeout=10s'
+        response = requests.get(backup_url)
+        if response.status_code == 200:
+            return response.json()['nodes']
+        else:
+            return 'Nodes failed'
+        
+    def get_leader_id(self):
+        nodes = self.nodes()
+        for node in nodes:
+            if node['voter']:
+                return node['id']
